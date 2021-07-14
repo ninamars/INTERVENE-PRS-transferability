@@ -46,7 +46,7 @@ temp <- d[d$eth2 == ancestry,] %>%
                 select("eid", "baselineage", "sex", "batch", paste0("C", 1:10), "chd", "eth2", "cadprs"); dim(temp)
 temp <- na.omit(temp);dim(temp) # 7628 SA; 7618 Black/Caribbean
 table(temp$chd)
-summary(d$chd_age[d$eid %in% temp$eid])
+summary(d$chd_age[d$eid %in% temp$eid])  # Age at diagnosis exists only for cases, applies for all diseases
 sd(d$chd_age[d$eid %in% temp$eid], na.rm = T)
 
 formula <- formula(paste0("chd ~ scale(cadprs) + ", covs))
