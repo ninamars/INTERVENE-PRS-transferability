@@ -7,8 +7,6 @@
 # -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 # -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-/fs/projects/finngen/incoming_data/nmars/apps/R-3.4.2/bin/R
-
 library(data.table)
 library(dplyr)
 library(stringi)
@@ -24,13 +22,13 @@ thresholds <- c("p1.0000e-04", "p3.0000e-04", "p1.0000e-03", "p3.0000e-03", "p1.
 
 # CAD:
 
-d <- fread("/fs/projects/ukbb/nmars/phenos/phenos_intervene_20201026.txt")
+d <- fread("phenos_intervene_20201026.txt")
 
 # EUR:
-cad_prs <- fread("/fs/projects/ukbb/nmars/prs_white_all_v2/1000G_cad1000g_UKB_white_LDpred_GRS_v2.txt") %>%
+cad_prs <- fread("1000G_cad1000g_UKB_white_LDpred_GRS_v2.txt") %>%
           select(c("IID", thresholds)) %>% rename(eid = IID)
 # Non-EUR:
-cad_prs <- fread("/fs/projects/ukbb/nmars/prs_nonwhite_all_v2/1000G_cad1000g_UKB_nonwhite_LDpred_GRS_v2.txt") %>%
+cad_prs <- fread("1000G_cad1000g_UKB_nonwhite_LDpred_GRS_v2.txt") %>%
           select(c("IID", thresholds)) %>% rename(eid = IID)
 
 d <- merge(d, cad_prs, by = "eid")
@@ -60,7 +58,7 @@ for(ii in 1:10) {
   res[ii,] <- c(paste0("prs", ii), summary(fit)$coef[2,])
 }
 
-write.table(res, paste0("/fs/projects/ukbb/nmars/cad_sa_or_per_sd_by_p.txt"),
+write.table(res, paste0("cad_sa_or_per_sd_by_p.txt"),
             quote = F, col.names = T,
             sep = "\t", na = "", row.names = F)
 
@@ -68,13 +66,13 @@ write.table(res, paste0("/fs/projects/ukbb/nmars/cad_sa_or_per_sd_by_p.txt"),
 
 # T2D:
 
-d <- fread("/fs/projects/ukbb/nmars/phenos/phenos_intervene_20201026.txt")
+d <- fread("phenos_intervene_20201026.txt")
 
 # EUR:
-t2d_prs <- fread("/fs/projects/ukbb/nmars/prs_white_all_v2/1000G_dm2with1000g_UKB_white_LDpred_GRS_v2.txt") %>%
+t2d_prs <- fread("1000G_dm2with1000g_UKB_white_LDpred_GRS_v2.txt") %>%
           select(c("IID", thresholds)) %>% rename(eid = IID)
 # Non-EUR:
-t2d_prs <- fread("/fs/projects/ukbb/nmars/prs_nonwhite_all_v2/1000G_dm2with1000g_UKB_nonwhite_LDpred_GRS_v2.txt") %>%
+t2d_prs <- fread("1000G_dm2with1000g_UKB_nonwhite_LDpred_GRS_v2.txt") %>%
           select(c("IID", thresholds)) %>% rename(eid = IID)
 
 d <- merge(d, t2d_prs, by = "eid")
@@ -104,7 +102,7 @@ for(ii in 1:10) {
   res[ii,] <- c(paste0("prs", ii), summary(fit)$coef[2,])
 }
 
-write.table(res, paste0("/fs/projects/ukbb/nmars/t2d_sa_or_per_sd_by_p.txt"),
+write.table(res, paste0("t2d_sa_or_per_sd_by_p.txt"),
             quote = F, col.names = T,
             sep = "\t", na = "", row.names = F)
 
@@ -112,13 +110,13 @@ write.table(res, paste0("/fs/projects/ukbb/nmars/t2d_sa_or_per_sd_by_p.txt"),
 
 # Breast cancer:
 
-d <- fread("/fs/projects/ukbb/nmars/phenos/phenos_intervene_20201026.txt")
+d <- fread("phenos_intervene_20201026.txt")
 
 # EUR:
-brcanc_prs <- fread("/fs/projects/ukbb/nmars/prs_white_all_v2/1000G_michailidoubreastcancerall1000g_UKB_white_LDpred_GRS_v2.txt") %>%
+brcanc_prs <- fread("1000G_michailidoubreastcancerall1000g_UKB_white_LDpred_GRS_v2.txt") %>%
           select(c("IID", thresholds)) %>% rename(eid = IID)
 # Non-EUR:
-brcanc_prs <- fread("/fs/projects/ukbb/nmars/prs_nonwhite_all_v2/1000G_michailidoubreastcancerall1000g_UKB_nonwhite_LDpred_GRS_v2.txt") %>%
+brcanc_prs <- fread("1000G_michailidoubreastcancerall1000g_UKB_nonwhite_LDpred_GRS_v2.txt") %>%
           select(c("IID", thresholds)) %>% rename(eid = IID)
 
 d <- merge(d, brcanc_prs, by = "eid")
@@ -134,7 +132,7 @@ brcanc <- d %>% filter(eth2 == "Black / Caribbean") %>%
 brcanc <- d %>% filter(eth2 == "South Asian") %>%
                 select("eid", "baselineage", "sex", "batch", paste0("C", 1:10), "brcanc", "eth2", thresholds); dim(brcanc)
 
-brcanc <- na.omit(brcanc);dim(brcanc) # excludes T1D patients and those diagnosed before age 18
+brcanc <- na.omit(brcanc);dim(brcanc) 
 names(brcanc)[17:26] <- c(paste0("prs", 1:10))
 table(brcanc$brcanc)
 summary(d$brcanc_age[d$eid %in% brcanc$eid])
@@ -148,7 +146,7 @@ for(ii in 1:10) {
   res[ii,] <- c(paste0("prs", ii), summary(fit)$coef[2,])
 }
 
-write.table(res, paste0("/fs/projects/ukbb/nmars/brcanc_sa_or_per_sd_by_p.txt"),
+write.table(res, paste0("brcanc_sa_or_per_sd_by_p.txt"),
             quote = F, col.names = T,
             sep = "\t", na = "", row.names = F)
 
@@ -156,13 +154,13 @@ write.table(res, paste0("/fs/projects/ukbb/nmars/brcanc_sa_or_per_sd_by_p.txt"),
 
 # Prostate cancer:
 
-d <- fread("/fs/projects/ukbb/nmars/phenos/phenos_intervene_20201026.txt")
+d <- fread("phenos_intervene_20201026.txt")
 
 # EUR:
-prcanc_prs <- fread("/fs/projects/ukbb/nmars/prs_white_all_v2/1000G_schumacherprostatecancer1000g_UKB_white_LDpred_GRS_v2.txt") %>%
+prcanc_prs <- fread("1000G_schumacherprostatecancer1000g_UKB_white_LDpred_GRS_v2.txt") %>%
           select(c("IID", thresholds)) %>% rename(eid = IID)
 # Non-EUR:
-prcanc_prs <- fread("/fs/projects/ukbb/nmars/prs_nonwhite_all_v2/1000G_schumacherprostatecancer1000g_UKB_nonwhite_LDpred_GRS_v2.txt") %>%
+prcanc_prs <- fread("1000G_schumacherprostatecancer1000g_UKB_nonwhite_LDpred_GRS_v2.txt") %>%
           select(c("IID", thresholds)) %>% rename(eid = IID)
 
 d <- merge(d, prcanc_prs, by = "eid")
@@ -178,7 +176,7 @@ prcanc <- d %>% filter(eth2 == "Black / Caribbean") %>%
 prcanc <- d %>% filter(eth2 == "South Asian") %>%
                 select("eid", "baselineage", "sex", "batch", paste0("C", 1:10), "prcanc", "eth2", thresholds); dim(prcanc)
 
-prcanc <- na.omit(prcanc);dim(prcanc) # excludes T1D patients and those diagnosed before age 18
+prcanc <- na.omit(prcanc);dim(prcanc) 
 names(prcanc)[17:26] <- c(paste0("prs", 1:10))
 table(prcanc$prcanc)
 summary(d$prcanc_age[d$eid %in% prcanc$eid])
@@ -187,12 +185,12 @@ sd(d$prcanc_age[d$eid %in% prcanc$eid], na.rm = T)
 res <- matrix(NA, nrow = 10, ncol = 5)
 
 for(ii in 1:10) {
-  formula <- formula(paste0("prcanc ~ scale(prs", ii,") + ", covs)) # men are NA in prcanc variable
+  formula <- formula(paste0("prcanc ~ scale(prs", ii,") + ", covs)) # women are NA in prcanc variable
   fit <- glm(formula, data = prcanc, family = "binomial")
   res[ii,] <- c(paste0("prs", ii), summary(fit)$coef[2,])
 }
 
-write.table(res, paste0("/fs/projects/ukbb/nmars/prcanc_sa_or_per_sd_by_p.txt"),
+write.table(res, paste0("prcanc_sa_or_per_sd_by_p.txt"),
             quote = F, col.names = T,
             sep = "\t", na = "", row.names = F)
 
@@ -200,7 +198,6 @@ write.table(res, paste0("/fs/projects/ukbb/nmars/prcanc_sa_or_per_sd_by_p.txt"),
 
 # Plot result
 
-setwd("/Users/nmars/Desktop/Projects/28 - INTERVENE/R1/3 - Associations")
 
 diseases <- c("cad", "t2d", "brcanc", "prcanc")
 
