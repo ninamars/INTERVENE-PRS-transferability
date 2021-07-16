@@ -44,7 +44,7 @@ ancestry <- "South Asian"
 covs <- paste(c("baselineage", "sex", "batch", paste0("C", 1:10)), collapse = " + ")
 temp <- d[d$eth2 == ancestry,] %>%
                 select("eid", "baselineage", "sex", "batch", paste0("C", 1:10), "chd", "eth2", "cadprs"); dim(temp)
-temp <- na.omit(temp);dim(temp) # 7628 SA; 7618 Black/Caribbean
+temp <- na.omit(temp);dim(temp)
 table(temp$chd)
 summary(d$chd_age[d$eid %in% temp$eid])  # Age at diagnosis exists only for cases, applies for all diseases
 sd(d$chd_age[d$eid %in% temp$eid], na.rm = T)
@@ -67,7 +67,7 @@ ancestry <- "South Asian"
 covs <- paste(c("baselineage", "sex", "batch", paste0("C", 1:10)), collapse = " + ")
 temp <- d[d$eth2 == ancestry,] %>%
         select("eid", "baselineage", "sex", "batch", paste0("C", 1:10), "diabetes", "eth2", "t2dprs"); dim(temp)
-temp <- na.omit(temp);dim(temp) # 7260 SA; 7346 Black/Caribbean
+temp <- na.omit(temp);dim(temp)
 table(temp$diabetes)
 summary(d$diabetes_age[d$eid %in% temp$eid])
 sd(d$diabetes_age[d$eid %in% temp$eid], na.rm = T)
@@ -86,7 +86,7 @@ ancestry <- "South Asian"
 covs <- paste(c("baselineage", "batch", paste0("C", 1:10)), collapse = " + ")
 temp <- d[d$eth2 == ancestry,] %>%
       select("eid", "baselineage", "sex", "batch", paste0("C", 1:10), "brcanc", "eth2", "brcancprs"); dim(temp)
-temp <- na.omit(temp);dim(temp) # 3514 SA; 4342 Black/Caribbean
+temp <- na.omit(temp);dim(temp)
 table(temp$brcanc)
 summary(d$brcanc_age[d$eid %in% temp$eid])
 sd(d$brcanc_age[d$eid %in% temp$eid], na.rm = T)
@@ -105,7 +105,7 @@ ancestry <- "South Asian"
 covs <- paste(c("baselineage", "batch", paste0("C", 1:10)), collapse = " + ")
 temp <- d[d$eth2 == ancestry,] %>%
                 select("eid", "baselineage", "sex", "batch", paste0("C", 1:10), "prcanc", "eth2", "prcancprs"); dim(temp)
-temp <- na.omit(temp);dim(temp) # 4d114 SA; 3276 Black/Caribbean
+temp <- na.omit(temp);dim(temp) 
 table(temp$prcanc)
 summary(d$prcanc_age[d$eid %in% temp$eid])
 sd(d$prcanc_age[d$eid %in% temp$eid], na.rm = T)
