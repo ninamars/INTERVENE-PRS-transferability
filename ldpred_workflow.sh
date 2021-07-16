@@ -20,7 +20,7 @@ do
   for i in {1..22};
   do
   python coord_genotypes.py \
-    --gf=eur1000G_chr.acgt.chr"${i}" \
+    --gf=eur1000G.chr"${i}" \
     --ssf="${phenotypes[k]}".txt \
     --N="${samplesize[k]}" \
     --out="${phenotypes[k]}"_coord_chr"${i}" \
