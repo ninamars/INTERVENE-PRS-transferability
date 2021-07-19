@@ -58,7 +58,7 @@ for(ii in 1:10) {
   res[ii,] <- c(paste0("prs", ii), summary(fit)$coef[2,])
 }
 
-write.table(res, paste0("cad_sa_or_per_sd_by_p.txt"),
+write.table(res, paste0("cad_sa_or_per_sd_by_p.txt"), # replace sa with bc for African / Caribbean ancestry
             quote = F, col.names = T,
             sep = "\t", na = "", row.names = F)
 
@@ -102,7 +102,7 @@ for(ii in 1:10) {
   res[ii,] <- c(paste0("prs", ii), summary(fit)$coef[2,])
 }
 
-write.table(res, paste0("t2d_sa_or_per_sd_by_p.txt"),
+write.table(res, paste0("t2d_sa_or_per_sd_by_p.txt"), # replace sa with bc for African / Caribbean ancestry
             quote = F, col.names = T,
             sep = "\t", na = "", row.names = F)
 
@@ -146,7 +146,7 @@ for(ii in 1:10) {
   res[ii,] <- c(paste0("prs", ii), summary(fit)$coef[2,])
 }
 
-write.table(res, paste0("brcanc_sa_or_per_sd_by_p.txt"),
+write.table(res, paste0("brcanc_sa_or_per_sd_by_p.txt"), # replace sa with bc for African / Caribbean ancestry
             quote = F, col.names = T,
             sep = "\t", na = "", row.names = F)
 
@@ -190,7 +190,7 @@ for(ii in 1:10) {
   res[ii,] <- c(paste0("prs", ii), summary(fit)$coef[2,])
 }
 
-write.table(res, paste0("prcanc_sa_or_per_sd_by_p.txt"),
+write.table(res, paste0("prcanc_sa_or_per_sd_by_p.txt"), # replace sa with bc for African / Caribbean ancestry
             quote = F, col.names = T,
             sep = "\t", na = "", row.names = F)
 
