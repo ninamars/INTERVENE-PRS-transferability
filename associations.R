@@ -210,8 +210,58 @@ exp(coefficients(fit)[2] + 1.96*summary(fit)$coefficients[2,2])
 
 
 # -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-# PRS-disease associations in FinnGen
+# PRS-disease associations in FinnGen across settlement regions
 # -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+
+library(data.table)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(plyr)
+
+data <- fread(...)
+
+data <- data[data$AGE_AT_DEATH_OR_NOW >= 18,]
+
+late <- c("North Karelia", "North Ostrobothnia", "Pohjois-Savo", "Kainuu") 
+mixed <- c("Kymenlaakso", "Lapland", "South Karelia", "Etelä-Savo", "Central Finland", "Etelä-Karjala")
+early <- c("Kanta-Häme", "Uusimaa", "South Ostrobothnia", "Varsinais-Suomi", "Pirkanmaa",
+          "Päijät-Häme", "Ostrobothnia", "Satakunta", "Central Ostrobothnia", "Etelä-Pohjanmaa")
+
+data$settlement <- with(data, ifelse(regionofbirthname %in% early, "Early settlement",
+                                ifelse(regionofbirthname %in% mixed, "Borderline",
+                                  ifelse(regionofbirthname %in% late, "Late settlement", NA))))
+table(data$settlement, useNA = "always")
+table(data$regionofbirthname, data$settlement, useNA = "always")
+table(data$regionofbirthname, useNA = "always")
+
+set <- c("Early settlement", "Late settlement", "Borderline")
+
+
+# Define logistic regression formula with scaling PRS to mean zero and unit variance by settelement region,
+# adjusting for age, sex, batches and 10PCs
+formula <- formula(...)
+
+res <- matrix(NA, nrow = length(set), ncol = 12)
+
+for(ii in 1:3) {
+  
+  alue <- set[ii]
+  res[ii,1] <- alue
+  data_alue <- data[data$settlement == alue,]
+
+  temp <- addmargins(table(data_alue$ENDPOINT)) # replace with relevant endpoint
+  res[ii,2] <- temp[[1]]
+  res[ii,3] <- temp[[2]]
+  res[ii,4] <- temp[[3]]
+  
+  fit <- glm(formula, data = data_alue, family = "binomial")
+  summary(fit)
+  
+  ... # Add relevant information to results file and save file
+  
+}
 
 
 
