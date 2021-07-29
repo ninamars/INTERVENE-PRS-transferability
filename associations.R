@@ -10,8 +10,6 @@
 library(data.table)
 library(dplyr)
 library(stringi)
-library(pROC)
-library(ROCR)
 library(ggplot2)
 
 d <- fread("phenos_intervene_20201026.txt")
