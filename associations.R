@@ -1,10 +1,8 @@
 
-# -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-# -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-# PRS-CS associations in UK Biobank
+######## ANALYSES PERFORMED SIMILARLY ACROSS BIOBANKS AND COHORTS
 
 # -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+# PRS-disease associations in UK Biobank
 # -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
 # South Asian and African / Caribbean
@@ -18,19 +16,21 @@ library(ggplot2)
 
 d <- fread("phenos_intervene_20201026.txt")
 
-cad_prs <- fread("prscs_cad.add.160614.website_UKB_nonwhite_PRS_20210615.txt")
+#### Replace the input files with relevant PRS file, here showing PRS-CS PRSs
+
+cad_prs <- fread("prscs_cad.add.160614.website_UKB_nonwhite_PRS.txt")
 names(cad_prs) <- c("eid", "cadprs")
 d <- merge(d, cad_prs, by = "eid")
 
-brcanc_prs <- fread("prscs_michailidoubreastcancerall_UKB_nonwhite_PRS_20210615.txt")
+brcanc_prs <- fread("prscs_michailidoubreastcancerall_UKB_nonwhite_PRS.txt")
 names(brcanc_prs) <- c("eid", "brcancprs")
 d <- merge(d, brcanc_prs, by = "eid")
 
-prcanc_prs <- fread("prscs_meta_v3_onco_euro_overall_ChrAll_1_release_UKB_nonwhite_PRS_20210615.txt")
+prcanc_prs <- fread("prscs_meta_v3_onco_euro_overall_ChrAll_1_release_UKB_nonwhite_PRS.txt")
 names(prcanc_prs) <- c("eid", "prcancprs")
 d <- merge(d, prcanc_prs, by = "eid")
 
-t2d_prs <- fread("prscs_METAANALYSIS_DIAGRAM_SE1_UKB_nonwhite_PRS_20210615.txt")
+t2d_prs <- fread("prscs_METAANALYSIS_DIAGRAM_SE1_UKB_nonwhite_PRS.txt")
 names(t2d_prs) <- c("eid", "t2dprs")
 d <- merge(d, t2d_prs, by = "eid")
 
@@ -120,22 +120,21 @@ summary(fit)
 
 # EUR ancestry
 
-
 d <- fread("phenos_intervene_20201026.txt")
 
-cad_prs <- fread("cad.add.160614.website_UKB_PRS_20201105.txt")
+cad_prs <- fread("cad.add.160614.website_UKB_PRS.txt")
 names(cad_prs) <- c("eid", "cadprs")
 d <- merge(d, cad_prs, by = "eid")
 
-brcanc_prs <- fread("prscs_michailidoubreastcancerall_UKB_PRS_20201028.txt")
+brcanc_prs <- fread("prscs_michailidoubreastcancerall_UKB_PRS.txt")
 names(brcanc_prs) <- c("eid", "brcancprs")
 d <- merge(d, brcanc_prs, by = "eid")
 
-prcanc_prs <- fread("onco_euro_overall_ChrAll_1_release_UKB_PRS_20201105.txt")
+prcanc_prs <- fread("onco_euro_overall_ChrAll_1_release_UKB_PRS.txt")
 names(prcanc_prs) <- c("eid", "prcancprs")
 d <- merge(d, prcanc_prs, by = "eid")
 
-t2d_prs <- fread("METAANALYSIS_DIAGRAM_SE1_UKB_PRS_20201105.txt")
+t2d_prs <- fread("METAANALYSIS_DIAGRAM_SE1_UKB_PRS.txt")
 names(t2d_prs) <- c("eid", "t2dprs")
 d <- merge(d, t2d_prs, by = "eid")
 
@@ -207,4 +206,18 @@ exp(coefficients(fit)[2])
 exp(coefficients(fit)[2] - 1.96*summary(fit)$coefficients[2,2])
 exp(coefficients(fit)[2] + 1.96*summary(fit)$coefficients[2,2])
 
-# -------------------------------------------------------------------------
+
+
+
+# -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+# PRS-disease associations in FinnGen
+# -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+
+
+
+
+
+
+
+
