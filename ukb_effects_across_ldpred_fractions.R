@@ -24,6 +24,7 @@ thresholds <- c("p1.0000e-04", "p3.0000e-04", "p1.0000e-03", "p3.0000e-03", "p1.
 
 d <- fread("phenos_intervene_20201026.txt")
 
+# Select input PRS relevant for ancestry:
 # EUR:
 cad_prs <- fread("cad1000g_UKB_white_LDpred_GRS_v2.txt") %>%
           select(c("IID", thresholds)) %>% rename(eid = IID)
