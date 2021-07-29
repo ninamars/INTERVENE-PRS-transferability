@@ -37,8 +37,8 @@ covs <- paste(c("baselineage", "sex", "batch", paste0("C", 1:10)), collapse = " 
 # EUR:
 cad <- select(d, c("eid", "baselineage", "sex", "batch", paste0("C", 1:10), "chd", "eth2", thresholds)); dim(cad)
 
-# Black / Caribbean:
-cad <- d %>% filter(eth2 == "Black / Caribbean") %>%
+# African / Caribbean:
+cad <- d %>% filter(eth2 == "African / Caribbean") %>%
                 select("eid", "baselineage", "sex", "batch", paste0("C", 1:10), "chd", "eth2", thresholds); dim(cad)
 # South Asian
 cad <- d %>% filter(eth2 == "South Asian") %>%
@@ -81,8 +81,8 @@ covs <- paste(c("baselineage", "sex", "batch", paste0("C", 1:10)), collapse = " 
 # EUR:
 t2d <- select(d, c("eid", "baselineage", "sex", "batch", paste0("C", 1:10), "diabetes", "eth2", thresholds)); dim(t2d)
 
-# Black / Caribbean:
-t2d <- d %>% filter(eth2 == "Black / Caribbean") %>%
+# African / Caribbean:
+t2d <- d %>% filter(eth2 == "African / Caribbean") %>%
                 select("eid", "baselineage", "sex", "batch", paste0("C", 1:10), "diabetes", "eth2", thresholds); dim(t2d)
 # South Asian
 t2d <- d %>% filter(eth2 == "South Asian") %>%
@@ -125,8 +125,8 @@ covs <- paste(c("baselineage", "batch", paste0("C", 1:10)), collapse = " + ") # 
 # EUR:
 brcanc <- select(d, c("eid", "baselineage", "sex", "batch", paste0("C", 1:10), "brcanc", "eth2", thresholds)); dim(brcanc)
 
-# Black / Caribbean:
-brcanc <- d %>% filter(eth2 == "Black / Caribbean") %>%
+# African / Caribbean:
+brcanc <- d %>% filter(eth2 == "African / Caribbean") %>%
                 select("eid", "baselineage", "sex", "batch", paste0("C", 1:10), "brcanc", "eth2", thresholds); dim(brcanc)
 # South Asian
 brcanc <- d %>% filter(eth2 == "South Asian") %>%
@@ -169,8 +169,8 @@ covs <- paste(c("baselineage", "batch", paste0("C", 1:10)), collapse = " + ") # 
 # EUR:
 prcanc <- select(d, c("eid", "baselineage", "sex", "batch", paste0("C", 1:10), "prcanc", "eth2", thresholds)); dim(prcanc)
 
-# Black / Caribbean:
-prcanc <- d %>% filter(eth2 == "Black / Caribbean") %>%
+# African / Caribbean:
+prcanc <- d %>% filter(eth2 == "African / Caribbean") %>%
                 select("eid", "baselineage", "sex", "batch", paste0("C", 1:10), "prcanc", "eth2", thresholds); dim(prcanc)
 # South Asian
 prcanc <- d %>% filter(eth2 == "South Asian") %>%
@@ -220,10 +220,10 @@ all$disease_short <-  c(rep(diseases[1], 30),
                         rep(diseases[2], 30),
                         rep(diseases[3], 30),
                         rep(diseases[4], 30))
-all$group <- factor(rep(c(rep("Black / Caribbean", 10),
+all$group <- factor(rep(c(rep("African / Caribbean", 10),
                           rep("European", 10),
                           rep("South Asian", 10)), 4),
-                    levels = c("European", "South Asian", "Black / Caribbean"))
+                    levels = c("European", "South Asian", "African / Caribbean"))
 all$threshold <- factor(rep(thresholds, 12), levels = thresholds)
 
 
