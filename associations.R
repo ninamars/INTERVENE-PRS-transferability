@@ -120,7 +120,7 @@ summary(fit)
 
 d <- fread("phenos_intervene_20201026.txt")
 
-cad_prs <- fread("cad.add.160614.website_UKB_PRS.txt")
+cad_prs <- fread("cad.add.160614.website_UKB_PRS.txt") # input files already contain the unrelated individuals of EUR ancestry
 names(cad_prs) <- c("eid", "cadprs")
 d <- merge(d, cad_prs, by = "eid")
 
