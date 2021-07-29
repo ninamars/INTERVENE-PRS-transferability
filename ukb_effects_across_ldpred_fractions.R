@@ -25,10 +25,10 @@ thresholds <- c("p1.0000e-04", "p3.0000e-04", "p1.0000e-03", "p3.0000e-03", "p1.
 d <- fread("phenos_intervene_20201026.txt")
 
 # EUR:
-cad_prs <- fread("1000G_cad1000g_UKB_white_LDpred_GRS_v2.txt") %>%
+cad_prs <- fread("cad1000g_UKB_white_LDpred_GRS_v2.txt") %>%
           select(c("IID", thresholds)) %>% rename(eid = IID)
 # Non-EUR:
-cad_prs <- fread("1000G_cad1000g_UKB_nonwhite_LDpred_GRS_v2.txt") %>%
+cad_prs <- fread("cad1000g_UKB_nonwhite_LDpred_GRS_v2.txt") %>%
           select(c("IID", thresholds)) %>% rename(eid = IID)
 
 d <- merge(d, cad_prs, by = "eid")
@@ -69,10 +69,10 @@ write.table(res, paste0("cad_sa_or_per_sd_by_p.txt"), # replace sa with bc for A
 d <- fread("phenos_intervene_20201026.txt")
 
 # EUR:
-t2d_prs <- fread("1000G_dm2with1000g_UKB_white_LDpred_GRS_v2.txt") %>%
+t2d_prs <- fread("dm2with1000g_UKB_white_LDpred_GRS_v2.txt") %>%
           select(c("IID", thresholds)) %>% rename(eid = IID)
 # Non-EUR:
-t2d_prs <- fread("1000G_dm2with1000g_UKB_nonwhite_LDpred_GRS_v2.txt") %>%
+t2d_prs <- fread("dm2with1000g_UKB_nonwhite_LDpred_GRS_v2.txt") %>%
           select(c("IID", thresholds)) %>% rename(eid = IID)
 
 d <- merge(d, t2d_prs, by = "eid")
@@ -113,10 +113,10 @@ write.table(res, paste0("t2d_sa_or_per_sd_by_p.txt"), # replace sa with bc for A
 d <- fread("phenos_intervene_20201026.txt")
 
 # EUR:
-brcanc_prs <- fread("1000G_michailidoubreastcancerall1000g_UKB_white_LDpred_GRS_v2.txt") %>%
+brcanc_prs <- fread("michailidoubreastcancerall1000g_UKB_white_LDpred_GRS_v2.txt") %>%
           select(c("IID", thresholds)) %>% rename(eid = IID)
 # Non-EUR:
-brcanc_prs <- fread("1000G_michailidoubreastcancerall1000g_UKB_nonwhite_LDpred_GRS_v2.txt") %>%
+brcanc_prs <- fread("michailidoubreastcancerall1000g_UKB_nonwhite_LDpred_GRS_v2.txt") %>%
           select(c("IID", thresholds)) %>% rename(eid = IID)
 
 d <- merge(d, brcanc_prs, by = "eid")
@@ -157,10 +157,10 @@ write.table(res, paste0("brcanc_sa_or_per_sd_by_p.txt"), # replace sa with bc fo
 d <- fread("phenos_intervene_20201026.txt")
 
 # EUR:
-prcanc_prs <- fread("1000G_schumacherprostatecancer1000g_UKB_white_LDpred_GRS_v2.txt") %>%
+prcanc_prs <- fread("schumacherprostatecancer1000g_UKB_white_LDpred_GRS_v2.txt") %>%
           select(c("IID", thresholds)) %>% rename(eid = IID)
 # Non-EUR:
-prcanc_prs <- fread("1000G_schumacherprostatecancer1000g_UKB_nonwhite_LDpred_GRS_v2.txt") %>%
+prcanc_prs <- fread("schumacherprostatecancer1000g_UKB_nonwhite_LDpred_GRS_v2.txt") %>%
           select(c("IID", thresholds)) %>% rename(eid = IID)
 
 d <- merge(d, prcanc_prs, by = "eid")
