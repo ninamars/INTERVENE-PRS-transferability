@@ -14,7 +14,7 @@ library(ggplot2)
 
 d <- fread("phenos_intervene_20201026.txt")
 
-#### Replace the input files with relevant PRS file, here showing PRS-CS PRSs
+#### Replace the input files with relevant PRS file for the analysis
 
 cad_prs <- fread("prscs_cad.add.160614.website_UKB_nonwhite_PRS.txt")
 names(cad_prs) <- c("eid", "cadprs")
@@ -50,10 +50,6 @@ sd(d$chd_age[d$eid %in% temp$eid], na.rm = T)
 formula <- formula(paste0("chd ~ scale(cadprs) + ", covs))
 fit <- glm(formula, data = temp, family = "binomial")
 summary(fit)
-
-#exp(coefficients(fit)[2])
-#exp(coefficients(fit)[2] - 1.96*summary(fit)$coefficients[2,2])
-#exp(coefficients(fit)[2] + 1.96*summary(fit)$coefficients[2,2])
 
 # -------------------------------------------------------------------------
 
@@ -151,10 +147,6 @@ formula <- formula(paste0("chd ~ scale(cadprs) + ", covs))
 fit <- glm(formula, data = temp, family = "binomial")
 summary(fit)
 
-#exp(coefficients(fit)[2])
-#exp(coefficients(fit)[2] - 1.96*summary(fit)$coefficients[2,2])
-#exp(coefficients(fit)[2] + 1.96*summary(fit)$coefficients[2,2])
-
 # -------------------------------------------------------------------------
 
 # Type 2 diabetes
@@ -200,9 +192,6 @@ formula <- formula(paste0("prcanc ~ scale(prcancprs) + ", covs))
 fit <- glm(formula, data = temp, family = "binomial")
 summary(fit)
 
-exp(coefficients(fit)[2])
-exp(coefficients(fit)[2] - 1.96*summary(fit)$coefficients[2,2])
-exp(coefficients(fit)[2] + 1.96*summary(fit)$coefficients[2,2])
 
 
 
