@@ -22,7 +22,7 @@ cad_prs <- fread("prscs_cad.add.160614.website_UKB_nonwhite_PRS_20210615.txt")
 names(cad_prs) <- c("eid", "cadprs")
 d <- merge(d, cad_prs, by = "eid")
 
-brcanc_prs <- fread("michailidoubreastcancerall_UKB_nonwhite_PRS_20210615.txt")
+brcanc_prs <- fread("prscs_michailidoubreastcancerall_UKB_nonwhite_PRS_20210615.txt")
 names(brcanc_prs) <- c("eid", "brcancprs")
 d <- merge(d, brcanc_prs, by = "eid")
 
